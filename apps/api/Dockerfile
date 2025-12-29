@@ -8,14 +8,14 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libpq-dev \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy dependency file
+# Copy dependency file and source code (needed for hatch build)
 COPY pyproject.toml README.md ./
+COPY src/ ./src/
 
-# Install dependencies
+# Install the package (this will build and install washflow_api)
 RUN pip install --no-cache-dir .
 
-# Copy application code
-COPY src/ ./src/
+# Copy migrations and alembic config
 COPY migrations/ ./migrations/
 COPY alembic.ini ./
 
@@ -23,4 +23,4 @@ COPY alembic.ini ./
 EXPOSE 8000
 
 # Run migrations and start server
-CMD ["sh", "-c", "alembic upgrade head && uvicorn src.washflow_api.main:app --host 0.0.0.0 --port 8000"]
+CMD ["sh", "-c", "alembic upgrade head && uvicorn washflow_api.main:app --host 0.0.0.0 --port 8000"]
