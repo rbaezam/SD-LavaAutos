@@ -8,9 +8,19 @@ from washflow_api.core.config import get_settings
 
 settings = get_settings()
 
-# Create async engine
+
+def _convert_db_url(url: str) -> str:
+    """Convert standard postgres:// URL to asyncpg format."""
+    if url.startswith("postgres://"):
+        return url.replace("postgres://", "postgresql+asyncpg://", 1)
+    if url.startswith("postgresql://") and "+asyncpg" not in url:
+        return url.replace("postgresql://", "postgresql+asyncpg://", 1)
+    return url
+
+
+# Create async engine with converted URL
 engine = create_async_engine(
-    settings.database_url,
+    _convert_db_url(settings.database_url),
     echo=settings.debug,
     pool_pre_ping=True,
 )
