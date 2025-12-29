@@ -2,6 +2,7 @@
 
 from functools import lru_cache
 
+from pydantic import field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -35,6 +36,16 @@ class Settings(BaseSettings):
     feature_notifications: bool = True
     feature_whatsapp: bool = False  # Disabled until real provider configured
     feature_sms: bool = True
+
+    @field_validator("database_url", mode="before")
+    @classmethod
+    def convert_database_url(cls, v: str) -> str:
+        """Convert standard postgres:// URL to asyncpg format."""
+        if v.startswith("postgres://"):
+            return v.replace("postgres://", "postgresql+asyncpg://", 1)
+        if v.startswith("postgresql://") and "+asyncpg" not in v:
+            return v.replace("postgresql://", "postgresql+asyncpg://", 1)
+        return v
 
     @property
     def cors_origins_list(self) -> list[str]:
