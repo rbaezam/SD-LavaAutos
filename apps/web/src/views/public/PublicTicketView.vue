@@ -2,6 +2,7 @@
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useRoute } from 'vue-router'
 import axios from 'axios'
+import { config } from '@/lib/config'
 import PublicTicketCard from '@/components/public/PublicTicketCard.vue'
 import PublicTicketSkeleton from '@/components/public/PublicTicketSkeleton.vue'
 import PublicTicketNotFound from '@/components/public/PublicTicketNotFound.vue'
@@ -40,8 +41,8 @@ const publicCode = computed(() => {
   return (route.params.code as string)?.toUpperCase() || ''
 })
 
-// API base URL (without auth)
-const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000'
+// API base URL (from runtime config)
+const apiBaseUrl = config.API_BASE_URL
 
 // Branding computed values
 const brandColor = computed(() => ticket.value?.brand_primary_color || '#2563eb')
