@@ -117,7 +117,7 @@ function scrollToSection(href: string) {
       <div class="mt-12 border-t border-gray-200 pt-8">
         <div class="flex flex-col items-center justify-between gap-4 sm:flex-row">
           <p class="text-sm text-gray-500">
-            &copy; {{ currentYear }} WashFlow. Todos los derechos reservados.
+            &copy; {{ currentYear }} Shirtless Devs. Todos los derechos reservados.
           </p>
           <p class="text-sm text-gray-500">
             Hecho con <span class="text-red-500">&hearts;</span> en México
