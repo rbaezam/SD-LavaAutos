@@ -120,7 +120,7 @@ function scrollToSection(href: string) {
             &copy; {{ currentYear }} Shirtless Devs. Todos los derechos reservados.
           </p>
           <p class="text-sm text-gray-500">
-            Hecho con <span class="text-red-500">&hearts;</span> en México
+            Hecho con <span class="text-red-500">&hearts;</span> en México 🇲🇽
           </p>
         </div>
       </div>
