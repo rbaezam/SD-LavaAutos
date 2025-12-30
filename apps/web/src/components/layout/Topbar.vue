@@ -110,8 +110,7 @@ function closeUserMenu() {
         >
           <div
             v-if="showUserMenu"
-            class="absolute right-0 top-full z-50 mt-2 w-56 rounded-lg border bg-popover p-1 shadow-lg"
-            @mouseleave="closeUserMenu"
+            class="absolute right-0 top-full z-[60] mt-2 w-56 rounded-lg border bg-popover p-1 shadow-lg"
           >
             <div class="px-3 py-2 sm:hidden">
               <p class="text-sm font-medium">{{ authStore.user?.email || 'Usuario' }}</p>
@@ -145,7 +144,7 @@ function closeUserMenu() {
   <Teleport to="body">
     <div
       v-if="showUserMenu"
-      class="fixed inset-0 z-40"
+      class="fixed inset-0 z-[45]"
       @click="closeUserMenu"
     />
   </Teleport>
